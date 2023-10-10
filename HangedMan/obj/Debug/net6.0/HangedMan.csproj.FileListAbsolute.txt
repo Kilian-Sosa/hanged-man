@@ -1,0 +1,28 @@
+C:\Users\Kilian\source\repos\HangedMan\HangedMan\bin\Debug\net6.0\HangedMan.exe
+C:\Users\Kilian\source\repos\HangedMan\HangedMan\bin\Debug\net6.0\HangedMan.deps.json
+C:\Users\Kilian\source\repos\HangedMan\HangedMan\bin\Debug\net6.0\HangedMan.runtimeconfig.json
+C:\Users\Kilian\source\repos\HangedMan\HangedMan\bin\Debug\net6.0\HangedMan.dll
+C:\Users\Kilian\source\repos\HangedMan\HangedMan\bin\Debug\net6.0\HangedMan.pdb
+C:\Users\Kilian\source\repos\HangedMan\HangedMan\obj\Debug\net6.0\HangedMan.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Kilian\source\repos\HangedMan\HangedMan\obj\Debug\net6.0\HangedMan.AssemblyInfoInputs.cache
+C:\Users\Kilian\source\repos\HangedMan\HangedMan\obj\Debug\net6.0\HangedMan.AssemblyInfo.cs
+C:\Users\Kilian\source\repos\HangedMan\HangedMan\obj\Debug\net6.0\HangedMan.csproj.CoreCompileInputs.cache
+C:\Users\Kilian\source\repos\HangedMan\HangedMan\obj\Debug\net6.0\HangedMan.dll
+C:\Users\Kilian\source\repos\HangedMan\HangedMan\obj\Debug\net6.0\refint\HangedMan.dll
+C:\Users\Kilian\source\repos\HangedMan\HangedMan\obj\Debug\net6.0\HangedMan.pdb
+C:\Users\Kilian\source\repos\HangedMan\HangedMan\obj\Debug\net6.0\HangedMan.genruntimeconfig.cache
+C:\Users\Kilian\source\repos\HangedMan\HangedMan\obj\Debug\net6.0\ref\HangedMan.dll
+C:\Users\Kilian\source\repos\Hanged Man\HangedMan\bin\Debug\net6.0\HangedMan.exe
+C:\Users\Kilian\source\repos\Hanged Man\HangedMan\bin\Debug\net6.0\HangedMan.deps.json
+C:\Users\Kilian\source\repos\Hanged Man\HangedMan\bin\Debug\net6.0\HangedMan.runtimeconfig.json
+C:\Users\Kilian\source\repos\Hanged Man\HangedMan\bin\Debug\net6.0\HangedMan.dll
+C:\Users\Kilian\source\repos\Hanged Man\HangedMan\bin\Debug\net6.0\HangedMan.pdb
+C:\Users\Kilian\source\repos\Hanged Man\HangedMan\obj\Debug\net6.0\HangedMan.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Kilian\source\repos\Hanged Man\HangedMan\obj\Debug\net6.0\HangedMan.AssemblyInfoInputs.cache
+C:\Users\Kilian\source\repos\Hanged Man\HangedMan\obj\Debug\net6.0\HangedMan.AssemblyInfo.cs
+C:\Users\Kilian\source\repos\Hanged Man\HangedMan\obj\Debug\net6.0\HangedMan.csproj.CoreCompileInputs.cache
+C:\Users\Kilian\source\repos\Hanged Man\HangedMan\obj\Debug\net6.0\HangedMan.dll
+C:\Users\Kilian\source\repos\Hanged Man\HangedMan\obj\Debug\net6.0\refint\HangedMan.dll
+C:\Users\Kilian\source\repos\Hanged Man\HangedMan\obj\Debug\net6.0\HangedMan.pdb
+C:\Users\Kilian\source\repos\Hanged Man\HangedMan\obj\Debug\net6.0\HangedMan.genruntimeconfig.cache
+C:\Users\Kilian\source\repos\Hanged Man\HangedMan\obj\Debug\net6.0\ref\HangedMan.dll
