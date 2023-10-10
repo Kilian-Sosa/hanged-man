@@ -32,6 +32,8 @@ void Main()
             Console.WriteLine($"La palabra no contiene la letra '{letter}'");
             AddBodyPart(++tries);
             Console.WriteLine();
+            Console.WriteLine($"Te quedan {MAX_TRIES - tries} intentos");
+            Console.WriteLine();
         }
     }
     if (tries == MAX_TRIES) Console.WriteLine("Has perdido. GL la próxima vez");
@@ -69,6 +71,9 @@ void ModifyWord(char letter, ref string answer)
 
 void AddBodyPart(int tries)
 {
+    Console.WriteLine("  _______");
+    Console.WriteLine("  |     |");
+
     switch (tries)
     {
         case 1:
