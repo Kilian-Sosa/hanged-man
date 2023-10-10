@@ -24,12 +24,12 @@ void Main()
 
         if (word.Contains(letter))
         {
-            Console.WriteLine("La palabra contiene la letra " + letter);
+            Console.WriteLine($"La palabra contiene la letra '{letter}'");
             ModifyWord(letter, ref answer);
         }
         else
         {
-            Console.WriteLine("La palabra no contiene la letra " + letter);
+            Console.WriteLine($"La palabra no contiene la letra '{letter}'");
             AddBodyPart(++tries);
             Console.WriteLine();
         }
@@ -41,8 +41,8 @@ void Main()
 void PrintIntro()
 {
     Console.WriteLine("Bienvenido al juego del ahorcado");
-    Console.WriteLine("Tienes " + MAX_TRIES + " intentos para adivinar la palabra");
-    Console.WriteLine("La palabra tiene " + word.Length + " letras");
+    Console.WriteLine($"Tienes {MAX_TRIES} intentos para adivinar la palabra");
+    Console.WriteLine($"La palabra tiene {word.Length} letras");
     Console.WriteLine("Buena suerte!");
 }
 
@@ -64,12 +64,7 @@ bool IsValid(string letter)
 void ModifyWord(char letter, ref string answer)
 {
     for (int i = 0; i < word.Length; i++)
-    {
-        if (word[i] == letter)
-        {
-            answer = answer.Remove(i, 1).Insert(i, letter.ToString());
-        }
-    }
+        if (word[i] == letter) answer = answer.Remove(i, 1).Insert(i, letter.ToString());
 }
 
 void AddBodyPart(int tries)
