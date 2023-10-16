@@ -17,7 +17,7 @@ void Main()
         Console.WriteLine("Ingrese una letra: ");
 
         string input = Console.ReadLine();
-        if (!IsValid(letter: input)) continue;
+        if (!IsValid(letter: input, answer)) continue;
 
         char letter = input[0];
         letter = char.ToUpper(letter);
@@ -52,13 +52,20 @@ void PrintErrorMessage(char letter)
     Console.WriteLine($"Te quedan {MAX_TRIES - tries} intentos");
 }
 
-bool IsValid(string letter)
+bool IsValid(string letter, string answer)
 {
-    if (letter.Length != 1)
-        Console.WriteLine("Debe ingresar una sola letra");
+    bool isAlreadyUsed = false;
+    if (string.IsNullOrEmpty(letter) || letter.Length != 1)
+        Console.WriteLine("Debe ingresar UNA letra");
     else if (!char.IsLetter(letter[0]))
         Console.WriteLine("Debe ingresar una letra del abecedario");
-    return letter.Length == 1 && char.IsLetter(letter[0]);
+    else
+    {
+        isAlreadyUsed = answer.Contains(letter.ToUpper());
+        if (isAlreadyUsed) Console.WriteLine("La letra ya ha sido usada");
+    }
+
+    return letter.Length == 1 && char.IsLetter(letter[0]) && !isAlreadyUsed;
 }
 
 void ModifyWord(char letter, ref string answer)
