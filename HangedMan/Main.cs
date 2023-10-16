@@ -1,5 +1,3 @@
-
-
 using System.Collections.Generic;
 
 List<string> WORD_LIST = ["OLA", "MANZANA", "PERA", "CASA", "COCHE", "MOTO", "BICICLETA", "ORDENADOR", "MOVIL"];
@@ -71,6 +69,7 @@ void Main()
             PrintErrorMessage(letter);
         }
         Console.WriteLine();
+        Console.WriteLine($"Letras usadas: {string.Join(", ", history)}\n");
     }
     if (tries == MAX_TRIES) Console.WriteLine("Has perdido. GL la próxima vez");
     else Console.WriteLine("Has ganado!!!");
