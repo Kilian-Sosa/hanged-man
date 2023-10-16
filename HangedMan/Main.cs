@@ -1,8 +1,8 @@
-using System;
+
 
 List<string> WORD_LIST = ["OLA", "MANZANA", "PERA", "CASA", "COCHE", "MOTO", "BICICLETA", "ORDENADOR", "MOVIL"];
 string word = WORD_LIST[new Random().Next(WORD_LIST.Count)];
-int MAX_TRIES = 6;
+const int MAX_TRIES = 6;
 int tries = 0;
 
 void Main()
@@ -29,11 +29,8 @@ void Main()
         }
         else
         {
-            Console.WriteLine($"La palabra no contiene la letra '{letter}'");
             AddBodyPart(++tries);
-            Console.WriteLine();
-            Console.WriteLine($"Te quedan {MAX_TRIES - tries} intentos");
-            Console.WriteLine();
+            PrintErrorMessage(letter);
         }
     }
     if (tries == MAX_TRIES) Console.WriteLine("Has perdido. GL la próxima vez");
@@ -46,6 +43,13 @@ void PrintIntro()
     Console.WriteLine($"Tienes {MAX_TRIES} intentos para adivinar la palabra");
     Console.WriteLine($"La palabra tiene {word.Length} letras");
     Console.WriteLine("Buena suerte!");
+}
+void PrintErrorMessage(char letter)
+{
+    Console.WriteLine($"La palabra no contiene la letra '{letter}'");
+    Console.WriteLine();
+    Console.WriteLine($"Te quedan {MAX_TRIES - tries} intentos");
+    Console.WriteLine();
 }
 
 bool IsValid(string letter)
