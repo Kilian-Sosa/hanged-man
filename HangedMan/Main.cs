@@ -85,6 +85,7 @@ void PrintAskMode()
 
 void PrintIntro()
 {
+    Console.Clear();
     Console.WriteLine($"Tienes {MAX_TRIES} intentos para adivinar la palabra");
     Console.WriteLine($"La palabra tiene {word.Length} letras");
     Console.WriteLine("Buena suerte!");
