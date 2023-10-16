@@ -42,7 +42,7 @@ void Main()
     word = WORD_LIST[new Random().Next(WORD_LIST.Count)].Trim();
 
     string answer = new('_', word.Length);
-    string history = string.Empty;
+    List<string> history = new();
 
     while (tries < MAX_TRIES && answer != word)
     {
@@ -55,10 +55,10 @@ void Main()
         char letter = input[0];
         letter = char.ToUpper(letter);
 
-        bool isAlreadyUsed = history.Contains(letter);
+        bool isAlreadyUsed = history.Contains(letter.ToString());
         if (isAlreadyUsed) { Console.WriteLine("La letra ya ha sido usada\n"); continue; }
 
-        history += letter;
+        history.Add(letter.ToString());
 
         if (word.Contains(letter))
         {
