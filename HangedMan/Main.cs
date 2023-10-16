@@ -11,7 +11,7 @@ void Main()
 
     string answer = new('_', word.Length);
 
-    while (tries < MAX_TRIES)
+    while (tries < MAX_TRIES && answer != word)
     {
         Console.WriteLine(answer);
         Console.WriteLine("Ingrese una letra: ");
