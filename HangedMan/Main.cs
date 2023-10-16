@@ -1,5 +1,3 @@
-
-
 using System.Collections.Generic;
 
 List<string> WORD_LIST = ["OLA", "MANZANA", "PERA", "CASA", "COCHE", "MOTO", "BICICLETA", "ORDENADOR", "MOVIL"];
@@ -42,7 +40,7 @@ void Main()
     word = WORD_LIST[new Random().Next(WORD_LIST.Count)].Trim();
 
     string answer = new('_', word.Length);
-    string history = string.Empty;
+    List<string> history = new();
 
     while (tries < MAX_TRIES && answer != word)
     {
@@ -55,10 +53,10 @@ void Main()
         char letter = input[0];
         letter = char.ToUpper(letter);
 
-        bool isAlreadyUsed = history.Contains(letter);
+        bool isAlreadyUsed = history.Contains(letter.ToString());
         if (isAlreadyUsed) { Console.WriteLine("La letra ya ha sido usada\n"); continue; }
 
-        history += letter;
+        history.Add(letter.ToString());
 
         if (word.Contains(letter))
         {
@@ -71,6 +69,7 @@ void Main()
             PrintErrorMessage(letter);
         }
         Console.WriteLine();
+        Console.WriteLine($"Letras usadas: {string.Join(", ", history)}\n");
     }
     if (tries == MAX_TRIES) Console.WriteLine("Has perdido. GL la próxima vez");
     else Console.WriteLine("Has ganado!!!");
@@ -85,6 +84,7 @@ void PrintAskMode()
 
 void PrintIntro()
 {
+    Console.Clear();
     Console.WriteLine($"Tienes {MAX_TRIES} intentos para adivinar la palabra");
     Console.WriteLine($"La palabra tiene {word.Length} letras");
     Console.WriteLine("Buena suerte!");
