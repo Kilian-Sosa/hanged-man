@@ -10,6 +10,7 @@ void Main()
     PrintIntro();
 
     string answer = new('_', word.Length);
+    string history = string.Empty;
 
     while (tries < MAX_TRIES && answer != word)
     {
@@ -17,10 +18,11 @@ void Main()
         Console.WriteLine("Ingrese una letra: ");
 
         string input = Console.ReadLine();
-        if (!IsValid(letter: input, answer)) continue;
+        if (!IsValid(letter: input, history)) continue;
 
         char letter = input[0];
         letter = char.ToUpper(letter);
+        history += letter;
 
         if (word.Contains(letter))
         {
@@ -52,17 +54,17 @@ void PrintErrorMessage(char letter)
     Console.WriteLine($"Te quedan {MAX_TRIES - tries} intentos");
 }
 
-bool IsValid(string letter, string answer)
+bool IsValid(string letter, string history)
 {
     bool isAlreadyUsed = false;
     if (string.IsNullOrEmpty(letter) || letter.Length != 1)
-        Console.WriteLine("Debe ingresar UNA letra");
+        Console.WriteLine("Debe ingresar UNA letra\n");
     else if (!char.IsLetter(letter[0]))
         Console.WriteLine("Debe ingresar una letra del abecedario");
     else
     {
-        isAlreadyUsed = answer.Contains(letter.ToUpper());
-        if (isAlreadyUsed) Console.WriteLine("La letra ya ha sido usada");
+        isAlreadyUsed = history.Contains(letter.ToUpper());
+        if (isAlreadyUsed) Console.WriteLine("La letra ya ha sido usada\n");
     }
 
     return letter.Length == 1 && char.IsLetter(letter[0]) && !isAlreadyUsed;
