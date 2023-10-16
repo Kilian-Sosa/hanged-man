@@ -1,13 +1,45 @@
 
 
+using System.Collections.Generic;
+
 List<string> WORD_LIST = ["OLA", "MANZANA", "PERA", "CASA", "COCHE", "MOTO", "BICICLETA", "ORDENADOR", "MOVIL"];
-string word = WORD_LIST[new Random().Next(WORD_LIST.Count)];
+string word = string.Empty;
 const int MAX_TRIES = 6;
 int tries = 0;
 
 void Main()
 {
+    Console.WriteLine("Bienvenido al juego del ahorcado");
+
+    string mode = string.Empty;
+
+    while(mode != "1" && mode != "2")
+    {
+        PrintAskMode();
+        mode = Console.ReadLine();
+        Console.WriteLine();
+    }
+
+    if (mode == "2") 
+    { 
+        WORD_LIST = new List<string>();
+        while (WORD_LIST.Count == 0)
+        {
+            Console.WriteLine("Jugador 1, introduce una o varias palabra/s");
+            Console.WriteLine("separadas por coma:");
+
+            string input = Console.ReadLine();
+
+            bool isValidList = string.IsNullOrEmpty(input) || input.Length == 0;
+            if (isValidList) { Console.WriteLine("Debe ingresar al menos una palabra\n"); continue; }
+
+            WORD_LIST = input.ToUpper().Split(',').ToList();
+        }
+    }
+
     PrintIntro();
+
+    word = WORD_LIST[new Random().Next(WORD_LIST.Count)].Trim();
 
     string answer = new('_', word.Length);
     string history = string.Empty;
@@ -18,10 +50,14 @@ void Main()
         Console.WriteLine("Ingrese una letra: ");
 
         string input = Console.ReadLine();
-        if (!IsValid(letter: input, history)) continue;
+        if (!IsValidWord(letter: input)) continue;
 
         char letter = input[0];
         letter = char.ToUpper(letter);
+
+        bool isAlreadyUsed = history.Contains(letter);
+        if (isAlreadyUsed) { Console.WriteLine("La letra ya ha sido usada\n"); continue; }
+
         history += letter;
 
         if (word.Contains(letter))
@@ -40,9 +76,15 @@ void Main()
     else Console.WriteLine("Has ganado!!!");
 }
 
+void PrintAskMode()
+{
+    Console.WriteLine("Seleccione el modo de juego");
+    Console.WriteLine("1. Un jugador");
+    Console.WriteLine("2. Dos jugadores");
+}
+
 void PrintIntro()
 {
-    Console.WriteLine("Bienvenido al juego del ahorcado");
     Console.WriteLine($"Tienes {MAX_TRIES} intentos para adivinar la palabra");
     Console.WriteLine($"La palabra tiene {word.Length} letras");
     Console.WriteLine("Buena suerte!");
@@ -54,20 +96,13 @@ void PrintErrorMessage(char letter)
     Console.WriteLine($"Te quedan {MAX_TRIES - tries} intentos");
 }
 
-bool IsValid(string letter, string history)
+bool IsValidWord(string letter)
 {
-    bool isAlreadyUsed = false;
     if (string.IsNullOrEmpty(letter) || letter.Length != 1)
         Console.WriteLine("Debe ingresar UNA letra\n");
     else if (!char.IsLetter(letter[0]))
         Console.WriteLine("Debe ingresar una letra del abecedario");
-    else
-    {
-        isAlreadyUsed = history.Contains(letter.ToUpper());
-        if (isAlreadyUsed) Console.WriteLine("La letra ya ha sido usada\n");
-    }
-
-    return letter.Length == 1 && char.IsLetter(letter[0]) && !isAlreadyUsed;
+    return letter.Length == 1 && char.IsLetter(letter[0]);
 }
 
 void ModifyWord(char letter, ref string answer)
