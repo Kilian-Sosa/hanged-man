@@ -32,6 +32,7 @@ void Main()
             AddBodyPart(++tries);
             PrintErrorMessage(letter);
         }
+        Console.WriteLine();
     }
     if (tries == MAX_TRIES) Console.WriteLine("Has perdido. GL la próxima vez");
     else Console.WriteLine("Has ganado!!!");
@@ -49,22 +50,15 @@ void PrintErrorMessage(char letter)
     Console.WriteLine($"La palabra no contiene la letra '{letter}'");
     Console.WriteLine();
     Console.WriteLine($"Te quedan {MAX_TRIES - tries} intentos");
-    Console.WriteLine();
 }
 
 bool IsValid(string letter)
 {
     if (letter.Length != 1)
-    {
         Console.WriteLine("Debe ingresar una sola letra");
-        return false;
-    }
-    if (!char.IsLetter(letter[0]))
-    {
+    else if (!char.IsLetter(letter[0]))
         Console.WriteLine("Debe ingresar una letra del abecedario");
-        return false;
-    }
-    return true;
+    return letter.Length == 1 && char.IsLetter(letter[0]);
 }
 
 void ModifyWord(char letter, ref string answer)
