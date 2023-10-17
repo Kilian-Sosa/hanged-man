@@ -34,14 +34,16 @@ void Main()
 
         history.Add(letter.ToString());
 
+        Console.Clear();
         if (word.Contains(letter))
         {
+            ShowDraw(tries);
             Console.WriteLine($"La palabra contiene la letra '{letter}'");
             ModifyWord(letter, ref answer);
         }
         else
         {
-            AddBodyPart(++tries);
+            ShowDraw(++tries);
             PrintErrorMessage(letter);
         }
         Console.WriteLine();
@@ -115,7 +117,7 @@ void ModifyWord(char letter, ref string answer)
         if (word[i] == letter) answer = answer.Remove(i, 1).Insert(i, letter.ToString());
 }
 
-void AddBodyPart(int tries)
+void ShowDraw(int tries)
 {
     Console.WriteLine("  _______");
     Console.WriteLine("  |     |");
