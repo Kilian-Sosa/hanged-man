@@ -9,31 +9,7 @@ void Main()
 {
     Console.WriteLine("Bienvenido al juego del ahorcado");
 
-    string mode = string.Empty;
-
-    while(mode != "1" && mode != "2")
-    {
-        PrintAskMode();
-        mode = Console.ReadLine();
-        Console.WriteLine();
-    }
-
-    if (mode == "2") 
-    { 
-        WORD_LIST = new List<string>();
-        while (WORD_LIST.Count == 0)
-        {
-            Console.WriteLine("Jugador 1, introduce una o varias palabra/s");
-            Console.WriteLine("separadas por coma:");
-
-            string input = Console.ReadLine();
-
-            bool isValidList = string.IsNullOrEmpty(input) || input.Length == 0;
-            if (isValidList) { Console.WriteLine("Debe ingresar al menos una palabra\n"); continue; }
-
-            WORD_LIST = input.ToUpper().Split(',').ToList();
-        }
-    }
+    SelectMode();
 
     PrintIntro();
 
@@ -58,14 +34,16 @@ void Main()
 
         history.Add(letter.ToString());
 
+        Console.Clear();
         if (word.Contains(letter))
         {
+            ShowDraw(tries);
             Console.WriteLine($"La palabra contiene la letra '{letter}'");
             ModifyWord(letter, ref answer);
         }
         else
         {
-            AddBodyPart(++tries);
+            ShowDraw(++tries);
             PrintErrorMessage(letter);
         }
         Console.WriteLine();
@@ -73,6 +51,34 @@ void Main()
     }
     if (tries == MAX_TRIES) Console.WriteLine("Has perdido. GL la próxima vez");
     else Console.WriteLine("Has ganado!!!");
+}
+
+void SelectMode()
+{
+    string mode = string.Empty;
+    while (mode != "1" && mode != "2")
+    {
+        PrintAskMode();
+        mode = Console.ReadLine();
+        Console.WriteLine();
+    }
+
+    if (mode == "2")
+    {
+        WORD_LIST = new List<string>();
+        while (WORD_LIST.Count == 0)
+        {
+            Console.WriteLine("Jugador 1, introduce una o varias palabra/s");
+            Console.WriteLine("separadas por coma:");
+
+            string input = Console.ReadLine();
+
+            bool isValidList = string.IsNullOrEmpty(input) || input.Length == 0;
+            if (isValidList) { Console.WriteLine("Debe ingresar al menos una palabra\n"); continue; }
+
+            WORD_LIST = input.ToUpper().Split(',').ToList();
+        }
+    }
 }
 
 void PrintAskMode()
@@ -111,7 +117,7 @@ void ModifyWord(char letter, ref string answer)
         if (word[i] == letter) answer = answer.Remove(i, 1).Insert(i, letter.ToString());
 }
 
-void AddBodyPart(int tries)
+void ShowDraw(int tries)
 {
     Console.WriteLine("  _______");
     Console.WriteLine("  |     |");
