@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+using System.Net;
 
 List<string> WORD_LIST = ["OLA", "MANZANA", "PERA", "CASA", "COCHE", "MOTO", "BICICLETA", "ORDENADOR", "MOVIL"];
 string word = string.Empty;
@@ -13,7 +13,9 @@ void Main()
 
     PrintIntro();
 
-    word = WORD_LIST[new Random().Next(WORD_LIST.Count)].Trim();
+    word = GetWord();
+    word = string.IsNullOrEmpty(word) ? WORD_LIST[new Random().Next(WORD_LIST.Count)].Trim() : word;
+    word = word.ToUpper();
 
     string answer = new('_', word.Length);
     List<string> history = new();
@@ -49,8 +51,65 @@ void Main()
         Console.WriteLine();
         Console.WriteLine($"Letras usadas: {string.Join(", ", history)}\n");
     }
-    if (tries == MAX_TRIES) Console.WriteLine("Has perdido. GL la próxima vez");
+    if (tries == MAX_TRIES) Console.WriteLine($"Has perdido, la palabra era {word}. GL la próxima vez");
     else Console.WriteLine("Has ganado!!!");
+}
+
+string GetWord()
+{
+    try
+    {
+        //HttpWebRequest request = (HttpWebRequest) WebRequest.Create("https://palabras-aleatorias-public-api.herokuapp.com/random"); // API Spanish words
+        HttpWebRequest request = (HttpWebRequest) WebRequest.Create("https://random-word-api.herokuapp.com/word");  // API English words
+        using (HttpWebResponse response = (HttpWebResponse) request.GetResponse())
+        using (Stream stream = response.GetResponseStream())
+        using (StreamReader reader = new StreamReader(stream))
+        {
+            // Read the JSON response
+            string jsonResponse = reader.ReadToEnd();
+
+            // Find the word within the JSON response
+            int startIndex = jsonResponse.IndexOf("\"") + 1; // Find the first double quote
+            int endIndex = jsonResponse.LastIndexOf("\""); // Find the last double quote
+
+            if (startIndex >= 0 && endIndex >= 0)
+            {
+                string word = jsonResponse.Substring(startIndex, endIndex - startIndex);
+                return word;
+            }
+            else
+            {
+                Console.WriteLine("Hubo un problema al recoger la palabra");
+                return string.Empty;
+            }
+            
+        }
+    }
+    catch (WebException ex)
+    {
+        Console.WriteLine("Error. Se utilizará la base de datos interna");
+        if (ex.Response is HttpWebResponse httpWebResponse)
+        {
+            if (httpWebResponse.StatusCode == HttpStatusCode.ServiceUnavailable)
+            {
+                // Handle the 503 Service Unavailable error here
+                // You can log the error or take appropriate action
+                // For example, you can retry the request after a delay
+                Console.WriteLine("503 Servidor inaccesible: " + ex.Message);
+            }
+        }
+        else
+        {
+            // Handle other WebException cases
+            Console.WriteLine("WebException: " + ex.Message);
+        }
+    }
+    catch (Exception ex)
+    {
+        // Handle other exceptions
+        Console.WriteLine("Exception: " + ex.Message);
+    }
+    return string.Empty;
 }
 
 void SelectMode()
