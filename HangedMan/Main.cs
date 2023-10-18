@@ -1,6 +1,6 @@
 using System.Net;
 
-List<string> WORD_LIST = ["OLA", "MANZANA", "PERA", "CASA", "COCHE", "MOTO", "BICICLETA", "ORDENADOR", "MOVIL"];
+List<string> WORD_LIST = ["OLA", "MANZANA", "PERA", "CASA", "COCHE", "MOTO", "BICICLETA", "ORDENADOR", "MOVIL", "MESA"];
 string word = string.Empty;
 const int MAX_TRIES = 6;
 int tries = 0;
@@ -11,11 +11,11 @@ void Main()
 
     SelectMode();
 
-    PrintIntro();
-
     word = GetWord();
     word = string.IsNullOrEmpty(word) ? WORD_LIST[new Random().Next(WORD_LIST.Count)].Trim() : word;
     word = word.ToUpper();
+
+    PrintIntro();
 
     string answer = new('_', word.Length);
     List<string> history = new();
