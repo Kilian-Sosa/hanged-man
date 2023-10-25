@@ -1,5 +1,5 @@
-# The Hanged Man
-The Hanged Man game in the shell with C#
+# HangMan
+The HangMan game in the shell with C#
 
 ## Minimum requirements:
 
