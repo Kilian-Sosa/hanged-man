@@ -6,7 +6,8 @@ const int MAX_TRIES = 6;
 int tries = 0;
 
 void Main() {
-    Console.WriteLine("Bienvenido al juego del ahorcado");
+    Console.WriteLine("Welcome to the HangMan game");
+
 
     SelectMode();
 
@@ -21,7 +22,7 @@ void Main() {
 
     while (tries < MAX_TRIES && answer != word) {
         Console.WriteLine(answer);
-        Console.WriteLine("Ingrese una letra: ");
+        Console.WriteLine("Write a letter: ");
 
         string input = Console.ReadLine() ?? "";
         if (!IsValidWord(letter: input)) continue;
@@ -30,25 +31,25 @@ void Main() {
         letter = char.ToUpper(letter);
 
         bool isAlreadyUsed = history.Contains(letter.ToString());
-        if (isAlreadyUsed) { Console.WriteLine("La letra ya ha sido usada\n"); continue; }
+        if (isAlreadyUsed) { Console.WriteLine("That letter has already been used\n"); continue; }
 
         history.Add(letter.ToString());
 
         Console.Clear();
         if (word.Contains(letter)) {
             ShowDraw(tries);
-            Console.WriteLine($"La palabra contiene la letra '{letter}'");
+            Console.WriteLine($"The word contains the letter '{letter}'");
             ModifyWord(letter, ref answer);
         }else {
             ShowDraw(++tries);
             PrintErrorMessage(letter);
         }
         Console.WriteLine();
-        Console.WriteLine($"Letras usadas: {string.Join(", ", history)}\n");
+        Console.WriteLine($"Letters used: {string.Join(", ", history)}\n");
     }
-    if (tries == MAX_TRIES) Console.WriteLine($"Has perdido. GL la próxima vez");
-    else Console.WriteLine("Has ganado!!!");
-    Console.WriteLine($"La palabra era {word}");
+    if (tries == MAX_TRIES) Console.WriteLine($"You lost. GL next time");
+    else Console.WriteLine("You won!!!");
+    Console.WriteLine($"The word was '{word}'");
 }
 
 string GetWord() {
@@ -71,20 +72,20 @@ string GetWord() {
                 string word = jsonResponse.Substring(startIndex, endIndex - startIndex);
                 return word;
             } else {
-                Console.WriteLine("Hubo un problema al recoger la palabra");
+                Console.WriteLine("There was a problem getting the word");
                 return string.Empty;
             }
 
         }
     }
     catch (WebException ex) {
-        Console.WriteLine("Error. Se utilizar  la base de datos interna");
+        Console.WriteLine("Error. The local DB will be used instead");
         if (ex.Response is HttpWebResponse httpWebResponse) {
             if (httpWebResponse.StatusCode == HttpStatusCode.ServiceUnavailable) {
                 // Handle the 503 Service Unavailable error here
                 // You can log the error or take appropriate action
                 // For example, you can retry the request after a delay
-                Console.WriteLine("503 Servidor inaccesible: " + ex.Message);
+                Console.WriteLine("503 Service Unavailabe: " + ex.Message);
             }
         } else {
             // Handle other WebException cases
@@ -108,13 +109,13 @@ void SelectMode() {
     if (mode == "2") {
         WORD_LIST = new List<string>();
         while (WORD_LIST.Count == 0) {
-            Console.WriteLine("Jugador 1, introduce una o varias palabra/s");
-            Console.WriteLine("separadas por coma:");
+            Console.WriteLine("Player 1, write one or multiple words");
+            Console.WriteLine("separated by comma:");
 
             string input = Console.ReadLine() ?? "";
 
             bool isValidList = string.IsNullOrEmpty(input) || input.Length == 0;
-            if (isValidList) { Console.WriteLine("Debe ingresar al menos una palabra\n"); continue; }
+            if (isValidList) { Console.WriteLine("You need to write at least one word\n"); continue; }
 
             WORD_LIST = input.ToUpper().Split(',').ToList();
         }
@@ -122,28 +123,28 @@ void SelectMode() {
 }
 
 void PrintAskMode() {
-    Console.WriteLine("Seleccione el modo de juego");
-    Console.WriteLine("1. Un jugador");
-    Console.WriteLine("2. Dos jugadores");
+    Console.WriteLine("Select game mode");
+    Console.WriteLine("1. One player");
+    Console.WriteLine("2. Two players");
 }
 
 void PrintIntro() {
     Console.Clear();
-    Console.WriteLine($"Tienes {MAX_TRIES} intentos para adivinar la palabra");
-    Console.WriteLine($"La palabra tiene {word.Length} letras");
-    Console.WriteLine("Buena suerte!");
+    Console.WriteLine($"You have {MAX_TRIES} tries to guess the word");
+    Console.WriteLine($"The word has {word.Length} letters");
+    Console.WriteLine("Good Luck!");
 }
 void PrintErrorMessage(char letter) {
-    Console.WriteLine($"La palabra no contiene la letra '{letter}'");
+    Console.WriteLine($"The word does not contain the letter '{letter}'");
     Console.WriteLine();
-    Console.WriteLine($"Te quedan {MAX_TRIES - tries} intentos");
+    Console.WriteLine($"You have {MAX_TRIES - tries} tries");
 }
 
 bool IsValidWord(string letter) {
     if (string.IsNullOrEmpty(letter) || letter.Length != 1)
-        Console.WriteLine("Debe ingresar UNA letra\n");
+        Console.WriteLine("You need to write ONE letter\n");
     else if (!char.IsLetter(letter[0]))
-        Console.WriteLine("Debe ingresar una letra del abecedario");
+        Console.WriteLine("You need to write a letter of the alphabet");
     return letter.Length == 1 && char.IsLetter(letter[0]);
 }
 
