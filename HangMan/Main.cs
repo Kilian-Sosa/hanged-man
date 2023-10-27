@@ -8,15 +8,13 @@ int tries = 0;
 void Main() {
     Console.WriteLine("Welcome to the HangMan game");
 
-
     SelectMode();
 
-    word = GetWord();
     word = string.IsNullOrEmpty(word) ? WORD_LIST[new Random().Next(WORD_LIST.Count)].Trim() : word;
     word = word.ToUpper();
 
     PrintIntro();
-
+    ShowDraw(tries);
     string answer = new('_', word.Length);
     List<string> history = new();
 
@@ -119,7 +117,7 @@ void SelectMode() {
 
             WORD_LIST = input.ToUpper().Split(',').ToList();
         }
-    }
+    }else word = GetWord();
 }
 
 void PrintAskMode() {
