@@ -135,7 +135,7 @@ void PrintIntro() {
 void PrintErrorMessage(char letter) {
     Console.WriteLine($"The word does not contain the letter '{letter}'");
     Console.WriteLine();
-    Console.WriteLine($"You have {MAX_TRIES - tries} tries");
+    Console.WriteLine($"You have {MAX_TRIES - tries} tries left");
 }
 
 bool IsValidWord(string letter) {
